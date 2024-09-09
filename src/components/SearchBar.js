@@ -27,18 +27,7 @@ function Search() {
         className="p-2 border rounded w-full mb-4"
       />
       <ul className="space-y-4">
-        {filteredArtists.length > 0 ? (
-          filteredArtists.map(artist => (
-            <li key={artist.id} className="p-4 border rounded shadow">
-              <Link to={`/artist/${artist.id}`} className="text-xl font-semibold hover:underline">
-                {artist.name}
-              </Link>
-              <p>{artist.specialty}</p>
-            </li>
-          ))
-        ) : (
           <li>No artists found</li>
-        )}
       </ul>
     </div>
   );
