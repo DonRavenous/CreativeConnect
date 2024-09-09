@@ -1,0 +1,33 @@
+[
+    {
+      "id": 1,
+      "name": "Artist One",
+      "specialty": "Painter",
+      "bio": "A skilled painter with a passion for landscapes.",
+      "portfolio": [
+        "https://example.com/image1.jpg",
+        "https://example.com/image2.jpg"
+      ],
+      "location": [51.505, -0.09]
+    },
+    {
+      "id": 2,
+      "name": "Artist Two",
+      "specialty": "Sculptor",
+      "bio": "An experienced sculptor specializing in marble.",
+      "portfolio": [
+        "https://example.com/image3.jpg",
+        "https://example.com/image4.jpg"
+      ],
+      "location": [51.51, -0.1]
+    },
+    {"id": 3,
+      "name": "Artist Three",
+      "specialty": "Digital Artist",
+      "bio": "Profesional digital artits with a modernist style.",
+      "portfolio": [
+        "https://example.com/image1.jpg",
+        "https://example.com/image2.jpg"
+      ],
+      "location": [51, -0.09]}
+  ]

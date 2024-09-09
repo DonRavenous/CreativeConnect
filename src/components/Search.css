@@ -1,0 +1,16 @@
+.search-container {
+    position: fixed; /* Fixes the position relative to the viewport */
+    top: 20px; /* Distance from the top of the viewport */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust to truly center */
+    z-index: 1000; /* Ensure it's above other elements */
+  }
+  
+  .search-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 50px; /* Makes it look like a bubble */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    outline: none;
+    width: 300px; /* Adjust width as needed */
+  }
