@@ -2,22 +2,24 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import ArtistDetail from './components/ArtistDetail';
-import Search from './components/Search';
 import Header from './components/Header';
 import Map from './components/Map';
-
+import SearchBar from './components/SearchBar'; // New component
+import AccountAccess from './components/AccountAccess'; // New component
 
 function App() {
   return (
-    <div className="App">
+    <div className="App relative h-screen w-screen">
       <Header /> {/* Include the Header component */}
-      <main>
-        <Routes> {/* Define your routes here */}
+      
+      {/* Main content */}
+      <main className="absolute inset-0">
+        {/* Routes */}
+        <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/search" element={<Search />} />
+          <Route path="/search" element={<SearchBar />} />
           <Route path="/map" element={<Map />} />
           <Route path="/artist/:id" element={<ArtistDetail />} />
-          {/* Add other routes as needed */}
         </Routes>
       </main>
     </div>
@@ -25,3 +27,4 @@ function App() {
 }
 
 export default App;
+

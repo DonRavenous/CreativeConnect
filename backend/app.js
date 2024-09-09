@@ -5,16 +5,14 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes.js'); // Import the user routes
 const auth = require('./middleware/auth');
-const errorHandler = require('./middleware/errorMiddleware');
-
-app.use(errorHandler); // Global error handler
-
+const errorHandler = require('./middleware/error');
 
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json()); // Body parser
+app.use(errorHandler); // Global error handler
 
 // Routes
 app.use('/api/users', userRoutes); // Mount the routes
@@ -28,6 +26,6 @@ mongoose.connect('mongodb://localhost:27017/CreativeConnect', {
   .catch(err => console.log(err));
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 

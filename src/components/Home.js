@@ -1,7 +1,7 @@
 import React from 'react';
 import ArtistList from './ArtistList';
 import Map from './Map';
-import Search from './Search';
+import Search from './SearchBar';
 
 function Home() {
   return (
