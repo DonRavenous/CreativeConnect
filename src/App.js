@@ -6,6 +6,7 @@ import Search from './components/Search';
 import Header from './components/Header';
 import Map from './components/Map';
 
+
 function App() {
   return (
     <div className="App">
