@@ -1,17 +1,13 @@
 import React from 'react';
-import ArtistList from './ArtistList';
 import Map from './Map';
-import Search from './SearchBar';
 
-function Home() {
+function Home({ artistData }) {
   return (
     <div>
-        <Search /> {/* Search bar will float in the top middle */}
-        {/* Other content of the Home page */}
-      <Map />
-      <ArtistList />
-    </div>
+              <Map artistData={artistData} /> {/* Pass artistData as prop */}
+          </div>
   );
 }
+
 
 export default Home;

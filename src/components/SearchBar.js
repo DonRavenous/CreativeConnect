@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
-import artistData from '../data/artists.json'; // Adjust path if needed
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './Search.css'; // Ensure Search.css has the correct styles
+import './Search.css';
 
-function Search() {
+function SearchBar({ artistData }) {
   const [query, setQuery] = useState('');
-  const [filteredArtists, setFilteredArtists] = useState(artistData);
+  const [filteredArtists, setFilteredArtists] = useState([]);
 
-  const handleSearch = (event) => {
-    const searchQuery = event.target.value.toLowerCase();
-    setQuery(searchQuery);
+  useEffect(() => {
     const results = artistData.filter(artist =>
-      artist.name.toLowerCase().includes(searchQuery)
+      artist.name.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredArtists(results);
+  }, [query, artistData]);
+
+  const handleSearch = (event) => {
+    setQuery(event.target.value);
   };
 
   return (
-    <div className="container mx-auto p-4 relative z-10\"> {/* Ensure this div stays on top */}
-      <h2 className="text-2xl font-bold mb-4">Search Artists</h2>
+    <div className="w-90 p-4 bg-white rounded shadow-lg relative z-10">
+      <h2 className="text-xl font-bold mb-4">Search Artists</h2>
       <input
         type="text"
         value={query}
@@ -26,13 +27,24 @@ function Search() {
         placeholder="Search by artist name"
         className="p-2 border rounded w-full mb-4"
       />
-      <ul className="space-y-4">
-          <li>No artists found</li>
-      </ul>
+      {/* Only display the list if there is a query */}
+      {query && (
+        <ul className="space-y-4 max-h-60 overflow-y-auto">
+          {filteredArtists.length > 0 ? (
+            filteredArtists.map(artist => (
+              <li key={artist.id} className="p-2 border-b">
+                <Link to={`/artist/${artist.id}`} className="text-lg font-semibold hover:underline">
+                  {artist.name}
+                </Link>
+              </li>
+            ))
+          ) : (
+            <li>No artists found</li>
+          )}
+        </ul>
+      )}
     </div>
   );
 }
 
-export default Search;
-
-
+export default SearchBar;
