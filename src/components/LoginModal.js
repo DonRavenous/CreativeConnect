@@ -1,165 +1,73 @@
 import React, { useState } from 'react';
-import './LoginModal.css';
+import { useNavigate } from 'react-router-dom';
 
 function LoginModal({ closeLoginModal }) {
-  const [activeTab, setActiveTab] = useState('login');
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    role: '',
-  });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let endpoint;
-    const body = JSON.stringify(formData);
-
-    if (activeTab === 'login') {
-      endpoint = 'http://localhost:5001/api/users/login';
-    } else if (activeTab === 'register') {
-      endpoint = 'http://localhost:5001/api/users/register';
-    } else if (activeTab === 'forgot') {
-      endpoint = 'http://localhost:5001/api/users/reset-password';
-    }
-
+  const handleLogin = async () => {
     try {
-      const response = await fetch(endpoint, {
+      const response = await fetch('http://localhost:5001/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body,
+        body: JSON.stringify({ email, password }),
       });
+
       const data = await response.json();
 
       if (response.ok) {
-        if (activeTab === 'login') {
-          localStorage.setItem('authToken', data.token);
-          closeLoginModal(); 
-          window.location.href = '/Home'; 
-        } else if (activeTab === 'register') {
-          console.log("Registration successful:", data);
-          closeLoginModal();
-        } else if (activeTab === 'forgot') {
-          alert("Password reset email sent, please check your inbox.");
-        }
+        console.log('User ID received from response:', data.id);
+        localStorage.setItem('userId', data.id);
+        localStorage.setItem('authToken', data.token);
+        closeLoginModal();
+        navigate(`/profile/${data.id}`);
       } else {
-        console.error("Error:", data.errors || data.message);
+        setError(data.msg || 'Login failed. Please check your credentials.');
       }
     } catch (error) {
-      console.error("An error occurred:", error);
+      console.error('Error during login:', error);
+      setError('An error occurred during login. Please try again.');
     }
   };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <button className="close-btn" onClick={closeLoginModal}>X</button>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-80">
+        <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
         
-        <div className="tab-header">
-          <button onClick={() => setActiveTab('login')} className={activeTab === 'login' ? 'active' : ''}>Login</button>
-          <button onClick={() => setActiveTab('register')} className={activeTab === 'register' ? 'active' : ''}>Register</button>
-          <button onClick={() => setActiveTab('forgot')} className={activeTab === 'forgot' ? 'active' : ''}>Forgot Password</button>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {activeTab === 'login' && (
-            <>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Email"
-                className="p-2 border rounded w-full"
-                required
-              />
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Password"
-                className="p-2 border rounded w-full"
-                required
-              />
-              <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-                Login
-              </button>
-            </>
-          )}
-          
-          {activeTab === 'register' && (
-            <>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Name"
-                className="p-2 border rounded w-full"
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Email"
-                className="p-2 border rounded w-full"
-                required
-              />
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Password"
-                className="p-2 border rounded w-full"
-                minLength="6"
-                required
-              />
-              <select
-                name="role"
-                value={formData.role}
-                onChange={handleChange}
-                className="p-2 border rounded w-full"
-                required
-              >
-                <option value="">Select Role</option>
-                <option value="creative">Creative</option>
-                <option value="business">Business</option>
-              </select>
-              <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-                Register
-              </button>
-            </>
-          )}
-          
-          {activeTab === 'forgot' && (
-            <>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Email"
-                className="p-2 border rounded w-full"
-                required
-              />
-              <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-                Reset Password
-              </button>
-            </>
-          )}
-        </form>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+        />
+        
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+        />
+        
+        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+        
+        <button
+          onClick={handleLogin}
+          className="w-full bg-blue-500 text-white py-2 rounded font-semibold hover:bg-blue-600 transition-colors mb-2"
+        >
+          Log In
+        </button>
+        
+        <button
+          onClick={closeLoginModal}
+          className="w-full bg-gray-500 text-white py-2 rounded font-semibold hover:bg-gray-600 transition-colors"
+        >
+          Close
+        </button>
       </div>
     </div>
   );

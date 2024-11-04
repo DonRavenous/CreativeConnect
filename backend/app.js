@@ -1,34 +1,53 @@
-// backend/app.js
-
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const userRoutes = require('./routes/userRoutes'); // Import the user routes
-const errorHandler = require('./middleware/error'); // Import error handler middleware
+const fs = require('fs');
+const path = require('path');
+const userRoutes = require('./routes/userRoutes');
+const Profile = require('./models/Profile'); // Import the Profile model
+const errorHandler = require('./middleware/error');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// Middleware
 app.use(cors());
-app.use(express.json()); // Body parser
-app.use(errorHandler); // Global error handler
+app.use(express.json());
+app.use(errorHandler);
 
-// Root route for server status
 app.get('/', (req, res) => {
   res.send('Welcome to the backend server!');
 });
 
-// User routes
-app.use('/api/users', userRoutes); // Mount the user routes
+// Mount routes
+app.use('/api/users', userRoutes);
 
-// Connect to MongoDB
+// Serve static files from the uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Connect to MongoDB and initialize with placeholders if empty
 mongoose.connect('mongodb://localhost:27017/CreativeConnect', {
+
+})
+  .then(() => {
+    console.log('MongoDB connected');
+    initializeDatabase(); // Call the function to load placeholders
   })
-  .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log('MongoDB connection error:', err));
 
-// Start the server
+async function initializeDatabase() {
+  const profileCount = await Profile.countDocuments();
+  if (profileCount === 0) {
+    console.log('No profiles found in the database. Loading placeholders from artists.json...');
+    const placeholderData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'public', 'artists.json'), 'utf-8'));
+    try {
+      await Profile.insertMany(placeholderData);
+      console.log('Placeholders loaded successfully');
+    } catch (error) {
+      console.error('Error loading placeholders:', error);
+    }
+  }
+}
+
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 
 module.exports = app;

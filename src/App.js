@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Home from './components/Home';
 import ArtistDetail from './components/ArtistDetail';
 import Header from './components/Header';
-import AccountPage from './components/AccountPage';
+import ProfilePage from './components/ProfilePage';
 import Map from './components/Map';
 import SearchBar from './components/SearchBar';
 import LoginModal from './components/LoginModal';
@@ -14,6 +14,10 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [selectedArtist, setSelectedArtist] = useState(null); // State to track selected artist
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const openLoginModal = () => setLoginModalOpen(true);
   const closeLoginModal = () => {
@@ -46,6 +50,11 @@ function App() {
     if (token) setIsLoggedIn(true);
   }, []);
 
+  const handleArtistSelect = (artist) => {
+    setSelectedArtist(artist); // Update selected artist for map
+    navigate('/map'); // Navigate to the map
+  };
+
   if (loading) return <p>Loading artists...</p>;
 
   return (
@@ -57,13 +66,16 @@ function App() {
       <main className="flex-grow relative h-full w-full">
         {isLoggedIn ? (
           <>
-            <div className="search-bar">
-              <SearchBar artistData={artistData} />
-            </div>
+            {/* Conditionally render the search bar only on specific pages */}
+            {(location.pathname === '/' || location.pathname === '/map') && (
+              <div className="search-bar">
+                <SearchBar artistData={artistData} onSelectArtist={handleArtistSelect} />
+              </div>
+            )}
             <Routes>
               <Route path="/" element={<Home artistData={artistData} />} />
-              <Route path="/account" element={<AccountPage />} />
-              <Route path="/map" element={<Map artistData={artistData} />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/map" element={<Map artistData={artistData} selectedArtist={selectedArtist} />} />
               <Route path="/artist/:id" element={<ArtistDetail />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>

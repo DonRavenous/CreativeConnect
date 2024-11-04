@@ -1,37 +1,66 @@
 [
-    {
-      "id": 1,
-      "name": "Artist One",
-      "specialty": "Painter",
-      "bio": "A skilled painter with a passion for landscapes.",
-      "portfolio": [
-        "https://example.com/image1.jpg",
-        "https://example.com/image2.jpg"
-      ],
-      "lat": 51.510,
-      "lng": -0.13
-    },
-    {
-      "id": 2,
-      "name": "Artist Two",
-      "specialty": "Sculptor",
-      "bio": "An experienced sculptor specializing in marble.",
-      "portfolio": [
-        "https://example.com/image3.jpg",
-        "https://example.com/image4.jpg"
-      ],
-      "lat": 51.512,
-      "lng": -0.10
-    },
-    {"id": 3,
-      "name": "Artist Three",
-      "specialty": "Digital Artist",
-      "bio": "Profesional digital artits with a modernist style.",
-      "portfolio": [
-        "https://example.com/image1.jpg",
-        "https://example.com/image2.jpg"
-      ],
-      "lat": 51,
-      "lng": -0.09
-    }
-  ]
+  {
+    "id": 1,
+    "name": "Artist One",
+    "role": "artist",
+    "bio": "A skilled painter with a passion for landscapes.",
+    "profilePic": "https://example.com/profile1.jpg",
+    "mediums": ["Painting", "Watercolor"],
+    "portfolio": [
+      "https://example.com/image1.jpg",
+      "https://example.com/image2.jpg"
+    ],
+    "lat": 51.510,
+    "lng": -0.13
+  },
+  {
+    "id": 2,
+    "name": "Artist Two",
+    "role": "artist",
+    "bio": "An experienced sculptor specializing in marble.",
+    "profilePic": "https://example.com/profile2.jpg",
+    "mediums": ["Sculpting", "Marble"],
+    "portfolio": [
+      "https://example.com/image3.jpg",
+      "https://example.com/image4.jpg"
+    ],
+    "lat": 51.512,
+    "lng": -0.10
+  },
+  {
+    "id": 3,
+    "name": "Artist Three",
+    "role": "artist",
+    "bio": "Professional digital artist with a modernist style.",
+    "profilePic": "https://example.com/profile3.jpg",
+    "mediums": ["Digital Art", "Illustration"],
+    "portfolio": [
+      "https://example.com/image5.jpg",
+      "https://example.com/image6.jpg"
+    ],
+    "lat": 51.000,
+    "lng": -0.09
+  },
+  {
+    "id": 4,
+    "name": "Business One",
+    "role": "business",
+    "bio": "Looking for talented artists to collaborate on innovative projects.",
+    "profilePic": "https://example.com/business1.jpg",
+    "servicesNeeded": "Graphic Design, Illustration",
+    "partnershipOpportunities": "Long-term collaborations available.",
+    "lat": 51.520,
+    "lng": -0.14
+  },
+  {
+    "id": 5,
+    "name": "Business Two",
+    "role": "business",
+    "bio": "Seeking digital artists for upcoming marketing projects.",
+    "profilePic": "https://example.com/business2.jpg",
+    "servicesNeeded": "Digital Art, Animation",
+    "partnershipOpportunities": "Short-term projects with potential for more.",
+    "lat": 51.505,
+    "lng": -0.12
+  }
+]

@@ -8,19 +8,21 @@ function Header({ isLoggedIn, handleLogout }) {
         <h1 className="text-2xl font-bold">
           <Link to="/">CreativeConnect</Link>
         </h1>
-        <nav>
-          <Link to="/account" className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600">
-            Account
-          </Link>
-        </nav>
+        <nav className="flex space-x-4">
         {isLoggedIn && (
+          <>
+          <Link to="/profile" className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600">
+            Profile
+          </Link>
           <button
             onClick={handleLogout}
             className="bg-red-500 px-4 py-2 rounded hover:bg-red-600"
           >
             Log Out
           </button>
+          </>
         )}
+        </nav>
       </div>
     </header>
   );
