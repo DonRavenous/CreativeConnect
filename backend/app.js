@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
 const userRoutes = require('./routes/userRoutes');
-const Profile = require('./models/Profile'); // Import the Profile model
+const Profile = require('./models/Profile');
 const errorHandler = require('./middleware/error');
 
 const app = express();
