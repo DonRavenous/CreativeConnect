@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
+const Artist = require('../models/Artist');
 
 const router = express.Router();
 
@@ -175,7 +176,6 @@ router.get('/profile/:id', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-
 // Update profile by ID (requires authentication and own profile access)
 router.put('/profile/:id', auth, async (req, res) => {
   if (req.user.id.toString() !== req.params.id) {
@@ -198,7 +198,27 @@ router.put('/profile/:id', auth, async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-
+// Route to get all artists
+router.get('/artists', async (req, res) => {
+  try {
+    const artists = await Artist.find(); // Retrieve all artists
+    res.json(artists);
+  } catch (error) {
+    console.error('Error fetching artists:', error);
+    res.status(500).json({ error: 'Failed to fetch artists' });
+  }
+});
+// Get a specific artist profile by ID
+router.get('/artists/:id', async (req, res) => {
+  try {
+    const artist = await Artist.findById(req.params.id);
+    if (!artist) return res.status(404).json({ msg: 'Artist not found' });
+    res.json(artist);
+  } catch (error) {
+    console.error('Error fetching artist details:', error);
+    res.status(500).json({ msg: 'Failed to fetch artist information' });
+  }
+});
 // Configure multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

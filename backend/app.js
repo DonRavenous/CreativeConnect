@@ -19,8 +19,8 @@ app.get('/', (req, res) => {
 });
 
 // Mount routes
+app.use('/api', userRoutes);
 app.use('/api/users', userRoutes);
-
 // Serve static files from the uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -38,7 +38,7 @@ async function initializeDatabase() {
   const profileCount = await Profile.countDocuments();
   if (profileCount === 0) {
     console.log('No profiles found in the database. Loading placeholders from artists.json...');
-    const placeholderData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'public', 'artists.json'), 'utf-8'));
+    const placeholderData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'artists.json'), 'utf-8'));
     try {
       await Profile.insertMany(placeholderData);
       console.log('Placeholders loaded successfully');

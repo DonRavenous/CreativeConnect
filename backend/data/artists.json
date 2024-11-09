@@ -1,0 +1,352 @@
+[
+  {
+    "id": "6729adda638978487bad5abc",
+    "name": "Artist One",
+    "role": "artist",
+    "bio": "A skilled painter with a passion for landscapes.",
+    "profilePic": "https://example.com/profile1.jpg",
+    "specialty": "Painting, Oilcolor",
+    "portfolio": [
+      "/uploads/artist1_hill.jpeg",
+      "/uploads/artist1_shore.jpeg"
+    ],
+    "lat": 51.509865,
+    "lng": -0.118092
+  },
+  {
+    "id": "6729adda638978487bad5abf",
+    "name": "Artist Two",
+    "role": "artist",
+    "bio": "An experienced sculptor specializing in marble.",
+    "profilePic": "https://example.com/profile2.jpg",
+    "specialty": "Sculpting, Marble",
+    "portfolio": [
+      "https://example.com/image3.jpg",
+      "https://example.com/image4.jpg"
+    ],
+    "lat": 52.205337,
+    "lng": 0.121817
+  },
+  {
+    "id": "6729adda638978487bad5ac2",
+    "name": "Artist Three",
+    "role": "artist",
+    "bio": "Professional digital artist with a modernist style.",
+    "profilePic": "https://example.com/profile3.jpg",
+    "specialty": "Digital Art, Illustration",
+    "portfolio": [
+      "https://example.com/image5.jpg",
+      "https://example.com/image6.jpg"
+    ],
+    "lat": 53.483959,
+    "lng": -2.244644
+  },
+  {
+    "id": "6729aeac9c1582f2e20d4adb",
+    "name": "Business One",
+    "role": "business",
+    "bio": "Looking for talented artists to collaborate on innovative projects.",
+    "profilePic": "https://example.com/business1.jpg",
+    "servicesNeeded": "Graphic Design, Illustration",
+    "partnershipOpportunities": "Long-term collaborations available.",
+    "lat": 51.52,
+    "lng": -0.14
+  },
+  {
+    "id": "6729aeac9c1582f2e20d4add",
+    "name": "Business Two",
+    "role": "business",
+    "bio": "Seeking digital artists for upcoming marketing projects.",
+    "profilePic": "https://example.com/business2.jpg",
+    "servicesNeeded": "Digital Art, Animation",
+    "partnershipOpportunities": "Short-term projects with potential for more.",
+    "lat": 51.505,
+    "lng": -0.12
+  },
+  {
+    "id": "672d0b926047ada207a45540",
+    "name": "Artist Four",
+    "role": "artist",
+    "bio": "Abstract artist with a love for surrealism.",
+    "specialty": "Abstract, Surrealism",
+    "portfolio": [
+      "/uploads/artist4_artwork1.jpg",
+      "/uploads/artist4_artwork2.jpg"
+    ],
+    "lat": 51.454513,
+    "lng": -2.58791
+  },
+  {
+    "id": "672d0b926047ada207a45543",
+    "name": "Artist Five",
+    "role": "artist",
+    "bio": "Renowned sculptor focusing on modern installations.",
+    "specialty": "Sculpture, Installation Art",
+    "portfolio": [
+      "/uploads/artist5_sculpture1.jpg",
+      "/uploads/artist5_sculpture2.jpg"
+    ],
+    "lat": 53.800755,
+    "lng": -1.549077
+  },
+  {
+    "id": "672d0b926047ada207a45546",
+    "name": "Artist Six",
+    "role": "artist",
+    "bio": "Digital artist specializing in 3D rendering and animation.",
+    "specialty": "Digital Art, 3D Animation",
+    "portfolio": [
+      "/uploads/artist6_digital1.jpg",
+      "/uploads/artist6_digital2.jpg"
+    ],
+    "lat": 51.752022,
+    "lng": -1.257677
+  },
+  {
+    "id": "672d0b926047ada207a45549",
+    "name": "Artist Seven",
+    "role": "artist",
+    "bio": "Minimalist painter with a focus on color theory.",
+    "specialty": "Painting, Minimalism",
+    "portfolio": [
+      "/uploads/artist7_minimal1.jpg",
+      "/uploads/artist7_minimal2.jpg"
+    ],
+    "lat": 52.486244,
+    "lng": -1.890401
+  },
+  {
+    "id": "672d0b926047ada207a4554c",
+    "name": "Artist Eight",
+    "role": "artist",
+    "bio": "Street artist known for vibrant urban murals.",
+    "specialty": "Graffiti, Mural Art",
+    "portfolio": [
+      "/uploads/artist8_mural1.jpg",
+      "/uploads/artist8_mural2.jpg"
+    ],
+    "lat": 50.909698,
+    "lng": -1.404351
+  },
+  {
+    "id": "672d0b926047ada207a4554f",
+    "name": "Artist Nine",
+    "role": "artist",
+    "bio": "Illustrator and animator creating unique character designs.",
+    "specialty": "Illustration, Character Design",
+    "portfolio": [
+      "/uploads/artist9_illustration1.jpg",
+      "/uploads/artist9_illustration2.jpg"
+    ],
+    "lat": 52.629729,
+    "lng": -1.131592
+  },
+  {
+    "id": "672d0b926047ada207a45552",
+    "name": "Artist Ten",
+    "role": "artist",
+    "bio": "Photographer capturing urban life through a unique lens.",
+    "specialty": "Photography, Urban Landscapes",
+    "portfolio": [
+      "/uploads/artist10_photo1.jpg",
+      "/uploads/artist10_photo2.jpg"
+    ],
+    "lat": 53.408371,
+    "lng": -2.991573
+  },
+  {
+    "id": "672d0b926047ada207a45555",
+    "name": "Artist Eleven",
+    "role": "artist",
+    "bio": "Concept artist working primarily for video games.",
+    "specialty": "Concept Art, Game Design",
+    "portfolio": [
+      "/uploads/artist11_concept1.jpg",
+      "/uploads/artist11_concept2.jpg"
+    ],
+    "lat": 51.454513,
+    "lng": -0.97813
+  },
+  {
+    "id": "672d0b926047ada207a45558",
+    "name": "Artist Twelve",
+    "role": "artist",
+    "bio": "Classical painter specializing in Renaissance techniques.",
+    "specialty": "Classical Painting, Renaissance Art",
+    "portfolio": [
+      "/uploads/artist12_classic1.jpg",
+      "/uploads/artist12_classic2.jpg"
+    ],
+    "lat": 52.370216,
+    "lng": -1.265491
+  },
+  {
+    "id": "672d0b926047ada207a4555b",
+    "name": "Artist Thirteen",
+    "role": "artist",
+    "bio": "Ceramic artist creating functional yet artistic pottery.",
+    "specialty": "Ceramics, Pottery",
+    "portfolio": [
+      "/uploads/artist13_pottery1.jpg",
+      "/uploads/artist13_pottery2.jpg"
+    ],
+    "lat": 52.406822,
+    "lng": -1.519693
+  },
+  {
+    "id": "672d0b926047ada207a4555e",
+    "name": "Artist Fourteen",
+    "role": "artist",
+    "bio": "Watercolor artist with a delicate, expressive style.",
+    "specialty": "Watercolor, Landscapes",
+    "portfolio": [
+      "/uploads/artist14_watercolor1.jpg",
+      "/uploads/artist14_watercolor2.jpg"
+    ],
+    "lat": 54.978252,
+    "lng": -1.617439
+  },
+  {
+    "id": "672d0b926047ada207a45561",
+    "name": "Artist Fifteen",
+    "role": "artist",
+    "bio": "Glassblower creating intricate glass sculptures.",
+    "specialty": "Glass Art, Sculpture",
+    "portfolio": [
+      "/uploads/artist15_glass1.jpg",
+      "/uploads/artist15_glass2.jpg"
+    ],
+    "lat": 51.045041,
+    "lng": -3.009561
+  },
+  {
+    "id": "672d0b926047ada207a45564",
+    "name": "Creative Hub London",
+    "role": "business",
+    "bio": "Seeking contemporary artists for public art installations around London.",
+    "servicesNeeded": "Installation Art, Public Art",
+    "partnershipOpportunities": "Collaborations on city beautification projects",
+    "lat": 51.509865,
+    "lng": -0.1353
+  },
+  {
+    "id": "672eec5283150f002c442dc4",
+    "name": "Shoreditch Fashion Innovators",
+    "role": "business",
+    "bio": "Looking for digital artists for an upcoming fashion-tech event.",
+    "servicesNeeded": "Digital Art, Visual Effects",
+    "partnershipOpportunities": "Event-based collaborations with high exposure",
+    "lat": 51.52044,
+    "lng": -0.09375
+  },
+  {
+    "id": "672eec5283150f002c442dc7",
+    "name": "Bath Art Space",
+    "role": "business",
+    "bio": "Dedicated to supporting graffiti and street artists in Berlin.",
+    "servicesNeeded": "Graffiti, Mural Art",
+    "partnershipOpportunities": "Street art festivals and gallery shows",
+    "lat": 51.38129,
+    "lng": -2.360239
+  },
+  {
+    "id": "672eec5283150f002c442dca",
+    "name": "Bedford Design Collective",
+    "role": "business",
+    "bio": "Seeking sculptors for collaborative projects in modern design.",
+    "servicesNeeded": "Sculpture, Industrial Design",
+    "partnershipOpportunities": "Collaboration with interior designers for high-end clients",
+    "lat": 52.135973,
+    "lng": -0.472312
+  },
+  {
+    "id": "672eec5283150f002c442dcd",
+    "name": "Middlesbrough Creative Network",
+    "role": "business",
+    "bio": "Looking to partner with illustrators for a children's book series.",
+    "servicesNeeded": "Illustration, Graphic Design",
+    "partnershipOpportunities": "Long-term project for book and digital publishing",
+    "lat": 54.564933,
+    "lng": -1.326156
+  },
+  {
+    "id": "672eec5283150f002c442dd0",
+    "name": "Edgbaston Tech Art",
+    "role": "business",
+    "bio": "Connecting tech companies with digital and interactive artists.",
+    "servicesNeeded": "3D Animation, Digital Art",
+    "partnershipOpportunities": "Interactive installations for tech exhibitions",
+    "lat": 52.479699,
+    "lng": -1.902691
+  },
+  {
+    "id": "672eec5283150f002c442dd3",
+    "name": "Kidlington Innovation Hub",
+    "role": "business",
+    "bio": "Interested in collaborating with visual artists for brand advertising.",
+    "servicesNeeded": "Visual Art, Photography",
+    "partnershipOpportunities": "Ongoing brand campaigns for large corporations",
+    "lat": 51.75744,
+    "lng": -1.2679
+  },
+  {
+    "id": "672eec5283150f002c442dd6",
+    "name": "Nottingham Urban Art Collective",
+    "role": "business",
+    "bio": "Supporting local artists to create murals and urban art installations.",
+    "servicesNeeded": "Urban Art, Graffiti",
+    "partnershipOpportunities": "City-sponsored mural projects",
+    "lat": 52.931219,
+    "lng": -1.13362
+  },
+  {
+    "id": "672eec5283150f002c442dd9",
+    "name": "Bridgend Art & Storytelling",
+    "role": "business",
+    "bio": "Seeking illustrators for narrative-driven projects.",
+    "servicesNeeded": "Illustration, Storyboarding",
+    "partnershipOpportunities": "Short-term and long-term projects for digital and print media",
+    "lat": 51.688057,
+    "lng": -3.431481
+  },
+  {
+    "id": "672eec5283150f002c442ddc",
+    "name": "Hemel Music & Art Festival",
+    "role": "business",
+    "bio": "Looking for visual artists to create immersive environments.",
+    "servicesNeeded": "Installation Art, Light Design",
+    "partnershipOpportunities": "Annual festival with large audience reach",
+    "lat": 51.749306,
+    "lng": -0.476331
+  },
+  {
+    "id": "672eec5283150f002c442ddf",
+    "name": "Derby Art Collective",
+    "role": "business",
+    "bio": "Connecting with portrait artists for unique commissioned pieces.",
+    "servicesNeeded": "Portrait Art, Traditional Painting",
+    "partnershipOpportunities": "Exclusive portrait commissions for clients",
+    "lat": 53.011501,
+    "lng": -1.481499
+  },
+  {
+    "id": "672eec5283150f002c442de2",
+    "name": "Canterbury Creative Partnership",
+    "role": "business",
+    "bio": "Seeking modern painters for a series of gallery exhibitions.",
+    "servicesNeeded": "Painting, Mixed Media",
+    "partnershipOpportunities": "Quarterly exhibitions at prominent galleries",
+    "lat": 51.279843,
+    "lng": 1.083027
+  },
+  {
+    "id": "672eec5283150f002c442de5",
+    "name": "Swansea Art Ventures",
+    "role": "business",
+    "bio": "Connecting digital artists with innovative technology firms.",
+    "servicesNeeded": "Digital Art, Motion Graphics",
+    "partnershipOpportunities": "Collaborations for tech and art installations",
+    "lat": 51.674561,
+    "lng": -4.703774
+  }
+]

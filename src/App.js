@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useLocation, useNavigate,} from 'react-router-dom';
 import Home from './components/Home';
 import ArtistDetail from './components/ArtistDetail';
 import Header from './components/Header';
@@ -18,7 +18,7 @@ function App() {
 
   const location = useLocation();
   const navigate = useNavigate();
-
+  
   const openLoginModal = () => setLoginModalOpen(true);
   const closeLoginModal = () => {
     setLoginModalOpen(false);
@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     const fetchArtistData = async () => {
       try {
-        const response = await fetch('/artists.json');
+        const response = await fetch(`http://localhost:5001/api/artists`); // Call the backend API
         const data = await response.json();
         setArtistData(data);
         setLoading(false);
@@ -44,6 +44,7 @@ function App() {
     };
     fetchArtistData();
   }, []);
+  
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');

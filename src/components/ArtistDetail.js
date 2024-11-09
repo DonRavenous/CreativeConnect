@@ -6,25 +6,22 @@ function ArtistDetail() {
   const [artistData, setArtistData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  
   useEffect(() => {
-    const fetchArtistData = async () => {
+    const fetchArtist = async () => {
       try {
-        const response = await fetch('/artists.json'); // Adjust path if needed
+        const response = await fetch(`http://localhost:5001/api/artists/${id}`);
+        if (!response.ok) throw new Error('Failed to fetch artist information');
         const data = await response.json();
-
-        // Find the artist by id
-        const selectedArtist = data.find(artist => artist.id === parseInt(id));
-        setArtistData(selectedArtist || null);
+        setArtistData(data);
       } catch (error) {
-        console.error('Error fetching artist data:', error);
-        setError('Failed to load artist information.');
+        console.error('Error fetching artist details:', error);
+        setError('Could not load artist details.');
       } finally {
         setLoading(false);
       }
     };
-
-    fetchArtistData();
+    fetchArtist();
   }, [id]);
 
   if (loading) return <p>Loading artist information...</p>;
@@ -34,7 +31,6 @@ function ArtistDetail() {
   return (
     <div className="artist-details container mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">Artist Information</h2>
-
       {/* Common Information */}
       <div>
         <h3 className="text-xl font-semibold">Name</h3>
@@ -47,26 +43,18 @@ function ArtistDetail() {
 
       {/* Conditional Rendering for Artist and Business */}
       {artistData.role === 'artist' ? (
-        // Artist-specific Information
         <>
+          {/* Artist-specific Information */}
           <div>
-            <h3 className="text-xl font-semibold">Mediums of Art</h3>
-            <ul className="list-disc ml-5">
-              {artistData.mediums && artistData.mediums.length > 0 ? (
-                artistData.mediums.map((medium, index) => (
-                  <li key={index}>{medium}</li>
-                ))
-              ) : (
-                <p>No mediums listed.</p>
-              )}
-            </ul>
+            <h3 className="text-xl font-semibold">Specialty</h3>
+            <p>{artistData.specialty || "No specialty listed."}</p>
           </div>
           <div>
             <h3 className="text-xl font-semibold">Portfolio</h3>
             <div className="grid grid-cols-2 gap-4">
               {artistData.portfolio && artistData.portfolio.length > 0 ? (
                 artistData.portfolio.map((pic, index) => (
-                  <img key={index} src={pic} alt={`Portfolio ${index + 1}`} className="w-full h-auto rounded" />
+                  <img key={index} src={`http://localhost:5001${pic}`} alt={`Portfolio ${index + 1}`} className="w-full h-auto rounded" />
                 ))
               ) : (
                 <p>No portfolio images available.</p>
@@ -75,8 +63,8 @@ function ArtistDetail() {
           </div>
         </>
       ) : artistData.role === 'business' ? (
-        // Business-specific Information
         <>
+          {/* Business-specific Information */}
           <div>
             <h3 className="text-xl font-semibold">Services Needed</h3>
             <p>{artistData.servicesNeeded || "No services listed yet."}</p>
@@ -86,11 +74,10 @@ function ArtistDetail() {
             <p>{artistData.partnershipOpportunities || "No partnership opportunities listed yet."}</p>
           </div>
         </>
-      ) : (
-        <p>Role not specified.</p>
-      )}
+      ) : null}
     </div>
   );
 }
+
 
 export default ArtistDetail;

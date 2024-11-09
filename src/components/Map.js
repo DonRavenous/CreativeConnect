@@ -9,7 +9,7 @@ const customIcon = new L.Icon({
   iconUrl: '/map-marker-icon.jpg',
   iconSize: [32, 32],
   iconAnchor: [16, 32],
-  popupAnchor: [0, -32]
+  popupAnchor: [0, -32],
 });
 
 function Map({ artistData, selectedArtist, mapCenter }) {
@@ -17,12 +17,16 @@ function Map({ artistData, selectedArtist, mapCenter }) {
   const [nearbyArtists, setNearbyArtists] = useState([]);
   const navigate = useNavigate();
 
-  // Function to handle artist link click
-  const handleArtistClick = (artistId) => {
-    navigate(`/artist/${artistId}`);
+  // Handle click on artist to navigate to details
+  const handleArtistClick = (id) => {
+    if (id) {
+      navigate(`/artist/${id}`);
+    } else {
+      console.warn("Artist ID is undefined.");
+    }
   };
 
-  // Map click handler for placing a marker at clicked location
+  // Map click handler
   const MapClickHandler = () => {
     useMapEvents({
       click(e) {
@@ -34,24 +38,24 @@ function Map({ artistData, selectedArtist, mapCenter }) {
     return null;
   };
 
-  // Center map based on initial selectedArtist or mapCenter
+  // Map center handling
   const MapCenterHandler = () => {
     const map = useMap();
     useEffect(() => {
       if (mapCenter) {
-        map.setView(mapCenter, 13); // Center map on initial mapCenter
+        map.setView(mapCenter, 13);
       } else if (selectedArtist) {
-        map.setView([selectedArtist.lat, selectedArtist.lng], 13); // Center map on selected artist
+        map.setView([selectedArtist.lat, selectedArtist.lng], 13);
       }
-    }, [map]); // Only depend on `map` to run once on mount
+    }, [map]);
     return null;
   };
 
-  // Filter nearby artists based on markerPosition
+  // Filter nearby artists based on the marker position
   useEffect(() => {
     if (markerPosition && artistData) {
-      const radius = 5;
-      const nearby = artistData.filter(artist => {
+      const radius = 100; // km
+      const nearby = artistData.filter((artist) => {
         const distance = getDistance(markerPosition[0], markerPosition[1], artist.lat, artist.lng);
         return distance <= radius;
       });
@@ -60,7 +64,7 @@ function Map({ artistData, selectedArtist, mapCenter }) {
     }
   }, [markerPosition, artistData]);
 
-  // Update marker position when selected artist changes
+  // Update marker position for selected artist
   useEffect(() => {
     if (selectedArtist) {
       setMarkerPosition([selectedArtist.lat, selectedArtist.lng]);
@@ -76,23 +80,24 @@ function Map({ artistData, selectedArtist, mapCenter }) {
       <MapClickHandler />
       <MapCenterHandler />
 
-      {/* Marker for selected location or clicked location */}
+      {/* Selected location marker */}
       {markerPosition && (
         <Marker position={markerPosition} icon={customIcon}>
           <Popup>Selected Location</Popup>
         </Marker>
       )}
 
-      {/* Markers for nearby artists */}
-      {nearbyArtists.map(artist => (
-        <Marker key={artist.id} position={[artist.lat, artist.lng]} icon={customIcon}>
+      {/* Nearby artists markers */}
+      {nearbyArtists.map((artist) => (
+        <Marker key={artist._id} position={[artist.lat, artist.lng]} icon={customIcon}>
           <Popup>
             <strong
-              onClick={() => handleArtistClick(artist.id)}
+              onClick={() => handleArtistClick(artist._id)}
               className="cursor-pointer text-blue-600 underline"
             >
               {artist.name}
-            </strong><br />
+            </strong>
+            <br />
             {artist.specialty}
           </Popup>
         </Marker>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function ProfilePage() {
   const { id } = useParams();
-  const userId = id || localStorage.getItem('userId'); // Use route ID or fallback to stored user ID
+  const userId = id || localStorage.getItem('userId');
   
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -13,49 +13,27 @@ function ProfilePage() {
   const [formData, setFormData] = useState({
     name: '',
     bio: '',
-    mediums: '',
+    specialty: '',  // Using specialty instead of mediums
     servicesNeeded: '',
     partnershipOpportunities: '',
   });
 
-  // Define placeholder profiles for use when no userId is found
+  // Placeholder profiles for testing purposes
   const placeholderProfiles = useMemo(() => [
     {
       name: 'Artist One',
-      specialty: 'Painter',
+      specialty: 'Painting, Watercolor',
       bio: 'A skilled painter with a passion for landscapes.',
       role: 'artist',
       profilePic: null,
-      mediums: ['Oil Painting', 'Watercolor'],
       portfolio: [
-        'https://example.com/image1.jpg',
-        'https://example.com/image2.jpg',
+        '/uploads/artist1_hill.jpeg',
+        '/uploads/artist1_shore.jpeg',
       ],
     },
-    {
-      name: 'Artist Two',
-      specialty: 'Sculptor',
-      bio: 'An experienced sculptor specializing in marble.',
-      role: 'artist',
-      profilePic: null,
-      mediums: ['Marble', 'Bronze'],
-      portfolio: [
-        'https://example.com/image3.jpg',
-        'https://example.com/image4.jpg',
-      ],
-    },
-  ],[]);
+  ], []);
 
-  useEffect(() => {
-    // Fetch data or perform actions relying on `placeholderProfiles`
-    if (!userId) {
-      setError('User ID not found.');
-      setLoading(false);
-      return;
-    }
-
-    
-
+  useEffect(() => {console.log('Fetching profile for userId:', userId);
     const fetchProfileData = async () => {
       try {
         const response = await fetch(`http://localhost:5001/api/users/profile/${userId}`);
@@ -70,9 +48,12 @@ function ProfilePage() {
       }
     };
 
-    fetchProfileData();
-  }, [userId, placeholderProfiles]); // Include or exclude `placeholderProfiles` based on its use
-
+    if (userId) fetchProfileData();
+    else {
+      setError('User ID not found.');
+      setLoading(false);
+    }
+  }, [userId]);
 
   if (loading) return <p>Loading profile...</p>;
   if (error) return <p>{error}</p>;
@@ -87,14 +68,15 @@ function ProfilePage() {
     }));
   };
 
-
   const handleSave = async () => {
-    const token = localStorage.getItem('authToken'); // Retrieve token from localStorage
+    const token = localStorage.getItem('authToken');
     try {
       const response = await fetch(`http://localhost:5001/api/users/profile/${userId}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json',
-           'x-auth-token': token  }, // Attach token for authorization
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': token,
+        },
         body: JSON.stringify(formData),
       });
 
@@ -107,16 +89,12 @@ function ProfilePage() {
     }
   };
 
-  if (loading) return <p>Loading profile...</p>;
-  if (error) return <p>{error}</p>;
-
   return (
     <div className="profile-page container mx-auto p-4">
       <h2 className="text-3xl font-bold mb-4">
         {isEditing ? 'Edit Profile' : profileData.name}
       </h2>
 
-      {/* Edit mode */}
       {isEditing ? (
         <div>
           <label className="block font-semibold">Name</label>
@@ -136,22 +114,19 @@ function ProfilePage() {
             className="border p-2 rounded w-full mb-4"
           />
 
-          {/* Artist-specific fields */}
           {profileData.role === 'artist' && (
             <>
-              <label className="block font-semibold">Mediums of Art</label>
+              <label className="block font-semibold">Specialty</label>
               <input
                 type="text"
-                name="mediums"
-                value={formData.mediums}
+                name="specialty"
+                value={formData.specialty}
                 onChange={handleChange}
-                placeholder="Separate with commas"
                 className="border p-2 rounded w-full mb-4"
               />
             </>
           )}
 
-          {/* Business-specific fields */}
           {profileData.role === 'business' && (
             <>
               <label className="block font-semibold">Services Needed</label>
@@ -174,38 +149,26 @@ function ProfilePage() {
             </>
           )}
 
-          {/* Save and Cancel Buttons */}
-          <button
-            onClick={handleSave}
-            className="bg-green-500 text-white px-4 py-2 rounded mr-2"
-          >
+          <button onClick={handleSave} className="bg-green-500 text-white px-4 py-2 rounded mr-2">
             Save
           </button>
-          <button
-            onClick={handleEditToggle}
-            className="bg-red-500 text-white px-4 py-2 rounded"
-          >
+          <button onClick={handleEditToggle} className="bg-red-500 text-white px-4 py-2 rounded">
             Cancel
           </button>
         </div>
       ) : (
-        // View mode
         <div>
           <p className="text-lg mb-4">{profileData.bio}</p>
 
-          {/* Render Artist-specific details */}
           {profileData.role === 'artist' && (
             <div>
-              <h3 className="text-xl font-semibold">Mediums of Art</h3>
+              <h3 className="text-xl font-semibold">Specialty</h3>
               <ul className="list-disc ml-5">
-                {profileData.mediums.map((medium, index) => (
-                  <li key={index}>{medium}</li>
-                ))}
+                <li>{profileData.specialty}</li>
               </ul>
             </div>
           )}
 
-          {/* Render Business-specific details */}
           {profileData.role === 'business' && (
             <>
               <h3 className="text-xl font-semibold">Services Needed</h3>
@@ -215,11 +178,7 @@ function ProfilePage() {
             </>
           )}
 
-          {/* Edit Button */}
-          <button
-            onClick={handleEditToggle}
-            className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
-          >
+          <button onClick={handleEditToggle} className="bg-blue-500 text-white px-4 py-2 rounded mt-4">
             Edit Profile
           </button>
         </div>
